@@ -1,0 +1,73 @@
+---
+aws_system_user:
+aws_profile:             #Ex: profile1
+aws_access_key:          #access-key
+aws_secret_key:          # secret-key
+aws_region:              #Ex: "eu-west-1"
+aws_format:              #Ex: table
+foundation:              #Ex: "aws" 
+key_name:                #Ex: aws_keypair
+key_file:                #Ex: /home/oezeakac/labs/Ansible/cornerstone-playbooks/aws_keypair #non-root dir
+ansible_python_interpreter: #Ex: /usr/bin/python3.11
+cornerstone_prefix:         #Ex: cs
+cornerstone_ssh_admin_username: #Ex: rhadmin
+cornerstone_ssh_admin_pubkey: #Ex: rsa.pub
+cornerstone_aws_ssh_key_name: #Ex: "{{ key_name }}"
+cornerstone_aws_profile: #Ex: default
+cornerstone_ssh_user: #Ex: ec2-user
+cornerstone_ssh_key_path: #Ex: "ssh_key.pem"
+cornerstone_platform: #Ex: aws
+cornerstone_location: #Ex: eu-west-1
+
+cornerstone_sg:
+  - name: "testworkshop-sg"
+    description: Security group for aws
+    region: "{{ cornerstone_location }}"
+    rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        group_name: ""
+        cidr_ip: 0.0.0.0/0
+        rule_desc: "allowSSHin_all"
+      - proto: tcp
+        from_port: 443
+        to_port: 443
+        group_name: ""
+        cidr_ip: 0.0.0.0/0
+        rule_desc: "allowHttpsin_all"
+      - proto: all
+        from_port: ""
+        to_port: ""
+        group_name: "testworkshop-sg"
+        cidr_ip: 0.0.0.0/0
+        rule_desc: "allowAllfromSelf"
+
+vm_state: present
+
+guests:
+  testsystem1:
+      cornerstone_vm_state:            #Ex: "{{vm_state}}"
+      cornerstone_platform:            #Ex: aws
+      cornerstone_tag_purpose:         #Ex: "Testing"
+      cornerstone_tag_role:            #Ex: "testsystem"
+      cornerstone_vm_name:             #Ex: testsystem
+      cornerstone_location:            #Ex: eu-west-1
+      cornerstone_vm_aws_az:           #Ex: eu-west-1a
+      cornerstone_vm_flavour:          #Ex: t3.2xlarge
+      cornerstone_vm_aws_ami:          #Ex: ami-0b04ce5d876a9ba29
+      cornerstone_vm_aws_sg:           #Ex:  obitestworkshop-sg
+      cornerstone_virtual_network_name: #Ex: "{{ cornerstone_prefix }}vnet"
+      cornerstone_virtual_network_cidr: #Ex: "10.1.0.0/16"
+      cornerstone_subnet_name:          #Ex: "{{ cornerstone_prefix }}subnet"
+      cornerstone_public_private_ip:    #Ex: public
+      cornerstone_vm_private_ip:              
+      cornerstone_vm_assign_public_ip:  #Ex: yes
+      cornerstone_vm_public_ip:         #Ex: 63.34.15.95
+      cornerstone_publicip_allocation_method: #Ex: Dynamic
+      cornerstone_publicip_domain_name: #Ex: null
+      cornerstone_vm_os_disk_size:      #Ex: 10
+      cornerstone_vm_data_disk:         #Ex: false
+      cornerstone_vm_data_disk_device_name: #Ex: "/dev/xvdb"
+      cornerstone_aws_vm_data_disk_managed: #Ex: "gp2"
+      cornerstone_vm_data_disk_size:        #Ex: "50"

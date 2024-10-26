@@ -1,0 +1,3 @@
+ansible-navigator:
+  execution-environment:
+    image: quay.io/rh-ee-oezeakac/cornerstone@sha256:638a60e837f078006df9a4999d71d486e75cb4bf571aca50ea4769a606775635

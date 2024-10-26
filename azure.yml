@@ -1,0 +1,46 @@
+---
+ssh_key_name:             #Ex: "obi3" # Define ssh key name
+ssh_role_dir:             #Ex: "/home/oezeakac/labs/Ansible/cornerstone-playbooks" # Define directory to store ssh key
+foundation:               #Ex: "azure" 
+cornerstone_prefix:       #Ex: cs
+cornerstone_platform:     #Ex: azure
+cornerstone_ssh_user:     #Ex: azureuser
+cornerstone_ssh_key_path: #Ex: "/home/oezeakac/labs/Ansible/cornerstone-playbooks/{{ ssh_key_name }}"
+cornerstone_ssh_admin_username: #Ex: azureadmin
+cornerstone_ssh_admin_pubkey:   #<generate pub ssh key and sub in here when running run.yml>
+ansible_python_interpreter:     #Ex: /usr/bin/python3.11
+az_subscription_id:             # Subscription ID
+az_client_id:                   # Client ID
+az_secret:                      # Secret
+az_tenant:                      # tenant value
+
+vm_state: present
+
+guests:
+  basicvm01:
+    cornerstone_platform:                  #Ex:azure
+    cornerstone_azure_vm_disk_managed:     #Ex: Standard_LRS
+    cornerstone_working_dir:               #Ex: '/tmp/'
+    cornerstone_vm_state:                  #Ex: "{{vm_state}}"
+    cornerstone_vm_name:                   #Ex: "bastion"
+    cornerstone_storage_type:              #Ex: StandardSSD_LRS
+    cornerstone_location:                  #Ex: uksouth
+    cornerstone_azure_resource_group:      #Ex: "{{ cornerstone_prefix }}-rg"
+    cornerstone_virtual_network_name:      #Ex: "{{ cornerstone_prefix }}-vnet"
+    cornerstone_subnet_name:               #Ex: "{{ cornerstone_prefix }}subnet"
+    cornerstone_azure_subnet_cidr:         #Ex: "10.1.0.0/20"
+    cornerstone_vm_assign_public_ip:       #Ex: false
+    cornerstone_vm_public_ip:
+    cornerstone_public_private_ip:          #Ex: public
+    cornerstone_publicip_allocation_method: #Ex: Dynamic
+    cornerstone_publicip_domain_name: null
+    cornerstone_vm_flavour:                 #Ex: Standard_D2s_v3
+    cornerstone_vm_azure_image:             #Ex: rhel8-gm
+    cornerstone_vm_image_offer:             #Ex: "RHEL"
+    cornerstone_vm_image_publisher:         #Ex: "RedHat"
+    cornerstone_vm_image_sku:               #Ex: "87-gen2"
+    cornerstone_vm_image_version:           #Ex: "latest"
+    cornerstone_vm_os_disk_size:            #Ex: 32
+    cornerstone_vm_data_disk:               #Ex: false
+    cornerstone_tag_purpose:                #Ex: "bastion"
+    cornerstone_tag_role:                   #Ex: "testing"
